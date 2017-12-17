@@ -14,12 +14,17 @@ var connection = mysql.createConnection({
 //Connect to mysql server and sql database
 connection.connect(function(err){
     if (err) throw err;
-    start();
+    showItems();
 });
 
-// function start() {
-//     inquirer
-//         .prompt({
-//             name:
-//         })
-// }
+var showItems = function() {
+    var query = "SELECT * FROM products";
+    connection.query(query, function(err, res) {
+        for (var i = 0; i < res.length; i++) {
+            console.log("Item Id: " + res[i].item_id + "\n" +  "Product Name: " + res[i].product_name + "\n" + "Department: " + res[i].department_name +  "\n" + "Price: $ " + res[i].price + "\n" + "----------------------");
+        
+        }
+
+        console.log("-------------------------");
+    })
+};
